@@ -205,6 +205,28 @@
             }
         }
 
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+
         /* Custom scrollbar for beige theme */
         ::-webkit-scrollbar {
             width: 6px;
@@ -238,10 +260,31 @@
                         <span class="text-xl font-serif font-medium text-forest-600">Ventures</span>
                     </div>
                 </div>
+                <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8" data-aos="fade-left">
                     <a href="#philosophy" class="text-forest-700 hover:text-forest-800 transition-colors duration-300 font-medium">Philosophy</a>
                     <a href="#team" class="text-forest-700 hover:text-forest-800 transition-colors duration-300 font-medium">Team</a>
                     <a href="#contact" class="bg-forest-700 text-treehouse-50 px-6 py-3 rounded-full hover:bg-forest-800 transition-all duration-300 font-medium shadow-lg hover:shadow-xl">
+                        Partner with Us
+                    </a>
+                </div>
+                
+                <!-- Mobile Hamburger Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-forest-700 hover:text-forest-800 transition-colors duration-300 p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden bg-treehouse-100/95 backdrop-blur-md border-t border-forest-300/30 shadow-lg hidden">
+                <div class="px-6 py-6 space-y-4">
+                    <a href="#philosophy" class="block text-forest-700 hover:text-forest-800 transition-colors duration-300 font-medium py-2">Philosophy</a>
+                    <a href="#team" class="block text-forest-700 hover:text-forest-800 transition-colors duration-300 font-medium py-2">Team</a>
+                    <a href="#contact" class="block bg-forest-700 text-treehouse-50 px-6 py-3 rounded-full hover:bg-forest-800 transition-all duration-300 font-medium shadow-lg text-center mt-4">
                         Partner with Us
                     </a>
                 </div>
@@ -264,22 +307,16 @@
         <div class="absolute top-1/2 -left-8 w-8 h-8 opacity-20" style="background: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 24 24\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 2 Q18 8 12 14 Q6 8 12 2 Z\' fill=\'%234a7c59\'/%3E%3C/svg%3E'); animation: organicFloat 6s ease-in-out infinite;"></div>
         <div class="absolute top-2/3 -right-6 w-6 h-6 opacity-15" style="background: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 24 24\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 2 Q18 8 12 14 Q6 8 12 2 Z\' fill=\'%233d6b4f\'/%3E%3C/svg%3E'); animation: organicFloat 8s ease-in-out infinite; animation-delay: 3s;"></div>
         
-        <div class="relative max-w-7xl mx-auto px-6 lg:px-8 pt-32 pb-20">
-            <div class="text-center">
+        <div class="relative min-h-screen flex items-center justify-center px-6 lg:px-8">
+            <div class="text-center max-w-6xl mx-auto">
                 <div data-aos="fade-up" data-aos-delay="200">
-                    <h1 class="text-6xl md:text-8xl font-serif font-light text-forest-900 mb-6 leading-tight">
-                        Treehouse
-                        <span class="block font-medium bg-gradient-to-r from-forest-700 to-forest-500 bg-clip-text text-transparent shimmer-text">
-                            Ventures
-                        </span>
+                    <h1 class="text-3xl md:text-5xl font-serif font-light text-forest-900 mb-10 leading-tight max-w-3xl mx-auto">
+                        Where visionary founders meet high-value capital.
                     </h1>
                 </div>
                 
                 <div data-aos="fade-up" data-aos-delay="400">
-                    <p class="text-xl md:text-2xl text-forest-800 mb-4 max-w-4xl mx-auto leading-relaxed font-light">
-                        Where visionary founders meet high-value capital.
-                    </p>
-                    <p class="text-lg md:text-xl text-forest-700 mb-12 max-w-3xl mx-auto leading-relaxed">
+                    <p class="text-lg md:text-xl text-forest-700 mb-16 max-w-4xl mx-auto leading-relaxed">
                         We partner with exceptional entrepreneurs to build companies that define the future.
                     </p>
                 </div>
@@ -379,7 +416,7 @@
                 <h2 class="text-5xl md:text-6xl font-serif font-light text-forest-900 mb-8">Our Team</h2>
                 <div class="w-24 h-1 bg-gradient-to-r from-forest-600 to-forest-500 mx-auto mb-8"></div>
                 <p class="text-xl text-forest-700 max-w-4xl mx-auto leading-relaxed font-light">
-                    A collective of entrepreneurs, technologists, and investors united by shared conviction 
+                    A collective of entrepreneurs and builders united by shared conviction 
                     in the transformative power of innovation.
                 </p>
             </div>
@@ -644,6 +681,43 @@
             card.addEventListener('mouseleave', function() {
                 this.style.transform = 'translateY(0) scale(1)';
                 this.style.boxShadow = '';
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let isMenuOpen = false;
+
+        mobileMenuButton.addEventListener('click', function() {
+            isMenuOpen = !isMenuOpen;
+            
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('hidden');
+                mobileMenu.style.animation = 'slideDown 0.3s ease-out forwards';
+                // Change hamburger to X
+                this.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>';
+            } else {
+                mobileMenu.style.animation = 'slideUp 0.3s ease-out forwards';
+                setTimeout(() => {
+                    mobileMenu.classList.add('hidden');
+                }, 300);
+                // Change X back to hamburger
+                this.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>';
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (isMenuOpen) {
+                    isMenuOpen = false;
+                    mobileMenu.style.animation = 'slideUp 0.3s ease-out forwards';
+                    setTimeout(() => {
+                        mobileMenu.classList.add('hidden');
+                    }, 300);
+                    mobileMenuButton.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>';
+                }
             });
         });
     </script>
