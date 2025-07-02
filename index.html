@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treehouse Ventures — Building Tomorrow's Leaders</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg">
+    <link rel="apple-touch-icon" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'serif': ['Lora', 'serif'],
+                    },
+                    colors: {
+                        'treehouse': {
+                            50: '#ede6d1',
+                            100: '#e8e0c8',
+                            200: '#ddd4b8',
+                            300: '#d2c7a8',
+                            400: '#c7ba98',
+                            500: '#b5a995',
+                            600: '#9c8f7a',
+                            700: '#7d6f5a',
+                            800: '#65574a',
+                            900: '#4a3f37',
+                        },
+                        'forest': {
+                            50: '#f0f4f0',
+                            100: '#d9e3d9',
+                            200: '#b3c7b3',
+                            300: '#8cab8c',
+                            400: '#669066',
+                            500: '#4a7c59',
+                            600: '#3d6b4f',
+                            700: '#2f5a45',
+                            800: '#22493a',
+                            900: '#1a3b2e',
+                        }
+                    },
+                    animation: {
+                        'fade-up': 'fadeUp 0.8s ease-out',
+                        'fade-in': 'fadeIn 1s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
+                        'shimmer': 'shimmer 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        pulseSoft: {
+                            '0%, 100%': { opacity: '0.7' },
+                            '50%': { opacity: '1' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .beige-depth-bg {
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(74, 124, 89, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(61, 107, 79, 0.06) 0%, transparent 55%),
+                radial-gradient(ellipse at 40% 80%, rgba(74, 124, 89, 0.04) 0%, transparent 65%),
+                linear-gradient(135deg, #ede6d1 0%, #e8e0c8 25%, #ddd4b8 50%, #e8e0c8 75%, #ede6d1 100%);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 400% 400%;
+            animation: gradientShift 20s ease infinite;
+        }
+        
+        .texture-overlay {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(74, 124, 89, 0.02) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(61, 107, 79, 0.03) 0%, transparent 50%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234a7c59' fill-opacity='0.04'%3E%3Cpath d='M30 30c0-1.5-1.5-3-3-3s-3 1.5-3 3 1.5 3 3 3 3-1.5 3-3zm6-6c0-1.5-1.5-3-3-3s-3 1.5-3 3 1.5 3 3 3 3-1.5 3-3zm-12 0c0-1.5-1.5-3-3-3s-3 1.5-3 3 1.5 3 3 3 3-1.5 3-3z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-size: 40px 40px, 60px 60px, 60px 60px;
+        }
+
+        .tree-silhouette {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M100 280 L100 200 Q80 190 70 170 Q60 150 70 130 Q50 120 45 100 Q40 80 55 65 Q35 55 35 35 Q35 15 55 10 Q75 5 95 15 Q115 5 135 10 Q155 15 155 35 Q155 55 135 65 Q150 80 145 100 Q140 120 120 130 Q130 150 120 170 Q110 190 100 200 Z' fill='%234a7c59' fill-opacity='0.15'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left bottom;
+            background-size: 120px auto;
+        }
+
+        .tree-canopy {
+            background-image: 
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 100 50' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 40 Q20 10 35 15 Q50 5 65 15 Q80 10 90 40' stroke='%2322c55e' stroke-width='0.5' fill='none' opacity='0.15'/%3E%3C/svg%3E"),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 35 Q15 8 25 12 Q40 3 55 12 Q70 8 75 35' stroke='%234f7f4f' stroke-width='0.5' fill='none' opacity='0.1'/%3E%3C/svg%3E");
+            background-size: 150px 50px, 120px 40px;
+            background-repeat: repeat-x;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%, 0% 50%, 0% 50%, 0% 50%; }
+            25% { background-position: 100% 50%, 25% 75%, 50% 25%, 25% 75%; }
+            50% { background-position: 50% 100%, 75% 25%, 100% 50%, 50% 100%; }
+            75% { background-position: 25% 25%, 50% 100%, 25% 75%, 75% 25%; }
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-effect-light {
+            background: rgba(237, 230, 209, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(74, 124, 89, 0.2);
+        }
+        
+        .text-shadow-soft {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .text-shadow-glow {
+            text-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+        }
+        
+        .hover-lift {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+        }
+        
+        .pattern-dots-dark {
+            background-image: 
+                url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%234a7c59' fill-opacity='0.08'%3E%3Cpath d='M20 15 Q25 10 30 15 Q25 20 20 15 Q15 20 10 15 Q15 10 20 15 Z'/%3E%3C/g%3E%3C/svg%3E"),
+                radial-gradient(circle, rgba(74, 124, 89, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px, 30px 30px;
+        }
+
+        .leaf-pattern {
+            background-image: 
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%234a7c59' stroke-width='0.5' opacity='0.2'%3E%3Cpath d='M15 30 Q20 15 35 20 Q40 35 25 40 Q10 35 15 30'/%3E%3Cpath d='M45 15 Q50 10 55 15 Q50 25 40 20 Q35 10 45 15'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 80px 80px;
+        }
+
+        .tree-rings {
+            background-image: 
+                radial-gradient(circle at center, transparent 20px, rgba(74, 124, 89, 0.03) 22px, transparent 24px),
+                radial-gradient(circle at center, transparent 40px, rgba(61, 107, 79, 0.02) 42px, transparent 44px),
+                radial-gradient(circle at center, transparent 60px, rgba(74, 124, 89, 0.01) 62px, transparent 64px);
+        }
+
+        .shimmer-text {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s ease-in-out infinite;
+            background-clip: text;
+            -webkit-background-clip: text;
+        }
+
+        .organic-float {
+            border-radius: 60% 40% 70% 30%;
+            animation: organicFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes organicFloat {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg);
+                border-radius: 60% 40% 70% 30%;
+            }
+            25% { 
+                transform: translateY(-15px) rotate(5deg);
+                border-radius: 50% 60% 30% 70%;
+            }
+            50% { 
+                transform: translateY(-10px) rotate(0deg);
+                border-radius: 70% 30% 60% 40%;
+            }
+            75% { 
+                transform: translateY(-20px) rotate(-5deg);
+                border-radius: 40% 60% 50% 70%;
+            }
+        }
+
+        /* Custom scrollbar for beige theme */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #e8e0c8;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #4a7c59;
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3d6b4f;
+        }
+    </style>
+</head>
+<body class="bg-treehouse-50 font-sans overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center py-6">
+                <div class="flex items-center space-x-3" data-aos="fade-right">
+                    <div class="w-12 h-12 flex items-center justify-center">
+                        <img src="logo.png" alt="Treehouse Ventures Logo" class="w-14 h-14 object-contain">
+                    </div>
+                    <div>
+                        <span class="text-xl font-serif font-semibold text-forest-800">Treehouse</span>
+                        <span class="text-xl font-serif font-medium text-forest-600">Ventures</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8" data-aos="fade-left">
+                    <a href="#philosophy" class="text-forest-700 hover:text-forest-800 transition-colors duration-300 font-medium">Philosophy</a>
+                    <a href="#team" class="text-forest-700 hover:text-forest-800 transition-colors duration-300 font-medium">Team</a>
+                    <a href="#contact" class="bg-forest-700 text-treehouse-50 px-6 py-3 rounded-full hover:bg-forest-800 transition-all duration-300 font-medium shadow-lg hover:shadow-xl">
+                        Partner with Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen beige-depth-bg texture-overlay tree-canopy relative overflow-hidden">
+        <!-- Tree Silhouettes -->
+        <div class="absolute bottom-0 left-0 w-full h-full tree-silhouette opacity-40"></div>
+        <div class="absolute bottom-0 right-0 w-full h-full" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 200 300\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M100 280 L100 200 Q120 190 130 170 Q140 150 130 130 Q150 120 155 100 Q160 80 145 65 Q165 55 165 35 Q165 15 145 10 Q125 5 105 15 Q85 5 65 10 Q45 15 45 35 Q45 55 65 65 Q50 80 55 100 Q60 120 80 130 Q70 150 80 170 Q90 190 100 200 Z\' fill=\'%234a7c59\' fill-opacity=\'0.2\'/%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right bottom; background-size: 100px auto; opacity: 60%;"></div>
+        
+        <!-- Organic Floating Elements -->
+        <div class="absolute top-1/4 -left-32 w-64 h-64 bg-forest-400 organic-float mix-blend-multiply filter blur-xl opacity-10"></div>
+        <div class="absolute top-1/3 -right-36 w-72 h-72 bg-forest-500 organic-float mix-blend-multiply filter blur-xl opacity-8" style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-1/4 -left-40 w-80 h-80 bg-forest-300 organic-float mix-blend-multiply filter blur-xl opacity-6" style="animation-delay: 4s;"></div>
+        
+        <!-- Leaf particles -->
+        <div class="absolute top-1/2 -left-8 w-8 h-8 opacity-20" style="background: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 24 24\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 2 Q18 8 12 14 Q6 8 12 2 Z\' fill=\'%234a7c59\'/%3E%3C/svg%3E'); animation: organicFloat 6s ease-in-out infinite;"></div>
+        <div class="absolute top-2/3 -right-6 w-6 h-6 opacity-15" style="background: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 24 24\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 2 Q18 8 12 14 Q6 8 12 2 Z\' fill=\'%233d6b4f\'/%3E%3C/svg%3E'); animation: organicFloat 8s ease-in-out infinite; animation-delay: 3s;"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-6 lg:px-8 pt-32 pb-20">
+            <div class="text-center">
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <h1 class="text-6xl md:text-8xl font-serif font-light text-forest-900 mb-6 leading-tight">
+                        Treehouse
+                        <span class="block font-medium bg-gradient-to-r from-forest-700 to-forest-500 bg-clip-text text-transparent shimmer-text">
+                            Ventures
+                        </span>
+                    </h1>
+                </div>
+                
+                <div data-aos="fade-up" data-aos-delay="400">
+                    <p class="text-xl md:text-2xl text-forest-800 mb-4 max-w-4xl mx-auto leading-relaxed font-light">
+                        Where visionary founders meet high-value capital.
+                    </p>
+                    <p class="text-lg md:text-xl text-forest-700 mb-12 max-w-3xl mx-auto leading-relaxed">
+                        We partner with exceptional entrepreneurs to build companies that define the future.
+                    </p>
+                </div>
+                
+                <div data-aos="fade-up" data-aos-delay="600" class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    <a href="#philosophy" class="group bg-forest-700 text-treehouse-50 px-10 py-4 rounded-full text-lg font-medium hover:bg-forest-800 transition-all duration-300 shadow-xl hover:shadow-2xl flex items-center space-x-2">
+                        <span>Our Philosophy</span>
+                    </a>
+                    <a href="#team" class="text-forest-600 hover:text-forest-800 transition-colors duration-300 text-lg font-medium flex items-center space-x-2">
+                        <span>Meet the Team</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2" data-aos="fade-up" data-aos-delay="1000">
+            <div class="animate-pulse-soft">
+                <svg class="w-6 h-6 text-forest-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment Philosophy Section -->
+    <section id="philosophy" class="py-32 bg-treehouse-100 relative">
+        <div class="absolute inset-0 pattern-dots-dark leaf-pattern opacity-30"></div>
+        <div class="absolute inset-0 tree-rings opacity-20"></div>
+        <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-serif font-light text-forest-900 mb-8">Our Philosophy</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-forest-600 to-forest-500 mx-auto mb-8"></div>
+                <p class="text-xl text-forest-700 max-w-4xl mx-auto leading-relaxed font-light">
+                    We believe the most transformative companies emerge from the intersection of technological innovation, 
+                    market insight, and relentless execution.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-3 gap-12 mb-20">
+                <div class="text-center group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-20 h-20 bg-gradient-to-br from-forest-200 to-forest-300 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 transition-transform duration-300 border border-forest-400/30">
+                        <svg class="w-10 h-10 text-forest-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-serif font-medium text-forest-900 mb-6">Early-Stage Focus</h3>
+                    <p class="text-forest-600 leading-relaxed">We invest at the earliest stages, partnering with founders when ideas are crystallizing into market-changing realities.</p>
+                </div>
+                
+                <div class="text-center group" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-20 h-20 bg-gradient-to-br from-forest-300 to-forest-200 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 transition-transform duration-300 border border-forest-400/30">
+                        <svg class="w-10 h-10 text-forest-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-serif font-medium text-forest-900 mb-6">Deep Technology</h3>
+                    <p class="text-forest-600 leading-relaxed">We seek companies leveraging breakthrough technologies in AI, sustainability, fintech, and digital health.</p>
+                </div>
+                
+                <div class="text-center group" data-aos="fade-up" data-aos-delay="600">
+                    <div class="w-20 h-20 bg-gradient-to-br from-forest-200 to-forest-300 rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 transition-transform duration-300 border border-forest-400/30">
+                        <svg class="w-10 h-10 text-forest-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-serif font-medium text-forest-900 mb-6">Founder Partnership</h3>
+                    <p class="text-forest-600 leading-relaxed">Beyond capital, we provide strategic guidance, industry connections, and unwavering support through every stage of growth.</p>
+                </div>
+            </div>
+
+            <div class="bg-treehouse-200/50 backdrop-blur rounded-3xl p-12 md:p-16 shadow-2xl border border-forest-300/30" data-aos="fade-up" data-aos-delay="800">
+                <div class="text-center max-w-4xl mx-auto">
+                    <h3 class="text-3xl md:text-4xl font-serif font-medium text-forest-900 mb-8">Our Investment Approach</h3>
+                    <p class="text-lg text-forest-700 leading-relaxed mb-8">
+                        At Treehouse Ventures, we don't just evaluate companies—we seek to understand the underlying forces 
+                        shaping entire industries. Our investment philosophy centers on identifying inflection points where 
+                        technology, market dynamics, and exceptional leadership converge to create sustainable competitive advantages.
+                    </p>
+                    <p class="text-lg text-forest-700 leading-relaxed">
+                        We believe the most successful companies are built by founders who possess both deep technical expertise 
+                        and an intuitive understanding of human needs. Our role is to accelerate their journey with patient capital, 
+                        strategic insights, and access to a curated network of industry leaders, customers, and fellow entrepreneurs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-32 bg-treehouse-50 relative">
+        <div class="absolute inset-0 texture-overlay leaf-pattern"></div>
+        <!-- Subtle branch connectors -->
+        <div class="absolute top-1/2 left-0 w-full h-px" style="background: linear-gradient(90deg, transparent, rgba(74, 124, 89, 0.15) 20%, rgba(74, 124, 89, 0.15) 80%, transparent); height: 2px;"></div>
+        <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-serif font-light text-forest-900 mb-8">Our Team</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-forest-600 to-forest-500 mx-auto mb-8"></div>
+                <p class="text-xl text-forest-700 max-w-4xl mx-auto leading-relaxed font-light">
+                    A collective of entrepreneurs, technologists, and investors united by shared conviction 
+                    in the transformative power of innovation.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+                <!-- Aadhrik Kuila -->
+                <div class="bg-treehouse-100/60 backdrop-blur rounded-3xl p-8 text-center hover-lift shadow-lg border border-forest-300/30" data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative mb-8">
+                        <div class="w-32 h-32 bg-gradient-to-br from-forest-600 via-forest-700 to-forest-800 rounded-full mx-auto flex items-center justify-center shadow-xl">
+                            <span class="text-3xl font-bold text-treehouse-50">AK</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-serif font-medium text-forest-900 mb-2">Aadhrik Kuila</h3>
+                    <p class="text-forest-700 font-medium mb-6 text-lg">Founding Partner</p>
+                    <p class="text-forest-600 leading-relaxed text-sm mb-6">
+                        Aadhrik is currently the Founding PM and US Hire #1 at Frontdesk ($3M seed), building AI for SMBs. He was previously a PM on Microsoft's Voice AI team, leading their Speech Accessibility partnerships with UIUC, Apple, Google, Meta, and Amazon.
+                    </p>
+                    <a href="https://linkedin.com/in/aadhrik-kuila" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 bg-forest-700 hover:bg-forest-800 rounded-full transition-colors duration-300 group">
+                        <svg class="w-5 h-5 text-treehouse-50 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Michael Trehan -->
+                <div class="bg-treehouse-100/60 backdrop-blur rounded-3xl p-8 text-center hover-lift shadow-lg border border-forest-300/30" data-aos="fade-up" data-aos-delay="300">
+                    <div class="relative mb-8">
+                        <div class="w-32 h-32 bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 rounded-full mx-auto flex items-center justify-center shadow-xl">
+                            <span class="text-3xl font-bold text-treehouse-50">MT</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-serif font-medium text-forest-900 mb-2">Michael Trehan</h3>
+                    <p class="text-forest-700 font-medium mb-6 text-lg">Founding Partner</p>
+                    <p class="text-forest-600 leading-relaxed text-sm mb-6">
+                        Michael is currently CEO of HABIT (YC X25) working on robotics deployment. Before HABIT, he was a senior software engineer at Radiant Nuclear ($200M raised) and an investment banker at JP Morgan, where he joined full time at age 19.
+                    </p>
+                    <a href="https://linkedin.com/in/michael-trehan" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 bg-forest-700 hover:bg-forest-800 rounded-full transition-colors duration-300 group">
+                        <svg class="w-5 h-5 text-treehouse-50 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Harish Palani -->
+                <div class="bg-treehouse-100/60 backdrop-blur rounded-3xl p-8 text-center hover-lift shadow-lg border border-forest-300/30" data-aos="fade-up" data-aos-delay="400">
+                    <div class="relative mb-8">
+                        <div class="w-32 h-32 bg-gradient-to-br from-purple-600 via-purple-700 to-violet-800 rounded-full mx-auto flex items-center justify-center shadow-xl">
+                            <span class="text-3xl font-bold text-treehouse-50">HP</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-serif font-medium text-forest-900 mb-2">Harish Palani</h3>
+                    <p class="text-forest-700 font-medium mb-6 text-lg">Founding Partner</p>
+                    <p class="text-forest-600 leading-relaxed text-sm mb-6">
+                        Harish is currently CTO of HABIT (YC X25) working on robotic deployment. Before HABIT, he was the first AI/ML Scientist hired without a graduate degree at Amazon (research focus: vision-language models, multimodal agents) and led deep learning projects at Twitch.
+                    </p>
+                    <a href="https://linkedin.com/in/harish-palani" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 bg-forest-700 hover:bg-forest-800 rounded-full transition-colors duration-300 group">
+                        <svg class="w-5 h-5 text-treehouse-50 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Ethan B Mehta -->
+                <div class="bg-treehouse-100/60 backdrop-blur rounded-3xl p-8 text-center hover-lift shadow-lg border border-forest-300/30" data-aos="fade-up" data-aos-delay="500">
+                    <div class="relative mb-8">
+                        <div class="w-32 h-32 bg-gradient-to-br from-amber-600 via-orange-700 to-yellow-800 rounded-full mx-auto flex items-center justify-center shadow-xl">
+                            <span class="text-3xl font-bold text-treehouse-50">EM</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-serif font-medium text-forest-900 mb-2">Ethan B Mehta</h3>
+                    <p class="text-forest-700 font-medium mb-6 text-lg">Founding Partner</p>
+                    <p class="text-forest-600 leading-relaxed text-sm mb-6">
+                        Ethan is an engineer at Amazon, shaping the future of shopping through Rufus, Amazon's AI-powered assistant. He's worked across generative AI and deep learning systems, building scalable ML infrastructure for real-time ranking and search relevance.
+                    </p>
+                    <a href="https://linkedin.com/in/ethan-mehta" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 bg-forest-700 hover:bg-forest-800 rounded-full transition-colors duration-300 group">
+                        <svg class="w-5 h-5 text-treehouse-50 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Jaiveer Singh -->
+                <div class="bg-treehouse-100/60 backdrop-blur rounded-3xl p-8 text-center hover-lift shadow-lg border border-forest-300/30" data-aos="fade-up" data-aos-delay="600">
+                    <div class="relative mb-8">
+                        <div class="w-32 h-32 bg-gradient-to-br from-red-600 via-rose-700 to-pink-800 rounded-full mx-auto flex items-center justify-center shadow-xl">
+                            <span class="text-3xl font-bold text-treehouse-50">JS</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-serif font-medium text-forest-900 mb-2">Jaiveer Singh</h3>
+                    <p class="text-forest-700 font-medium mb-6 text-lg">Founding Partner</p>
+                    <p class="text-forest-600 leading-relaxed text-sm mb-6">
+                        Jaiveer is currently a senior software engineer at NVIDIA Isaac Robotics, where the skunkworks project he launched as an intern now powers the autonomy stacks of dozens of robotics companies. Since building his first robot nearly 15 years ago, he's worked at the first beauty salon robotics startup, secured multiple robotics research grants, and won back-to-back international titles for best-in-class robot programming.
+                    </p>
+                    <a href="https://linkedin.com/in/jaiveer-singh" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 bg-forest-700 hover:bg-forest-800 rounded-full transition-colors duration-300 group">
+                        <svg class="w-5 h-5 text-treehouse-50 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Manav Rathod -->
+                <div class="bg-treehouse-100/60 backdrop-blur rounded-3xl p-8 text-center hover-lift shadow-lg border border-forest-300/30" data-aos="fade-up" data-aos-delay="700">
+                    <div class="relative mb-8">
+                        <div class="w-32 h-32 bg-gradient-to-br from-teal-600 via-cyan-700 to-blue-800 rounded-full mx-auto flex items-center justify-center shadow-xl">
+                            <span class="text-3xl font-bold text-treehouse-50">MR</span>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-serif font-medium text-forest-900 mb-2">Manav Rathod</h3>
+                    <p class="text-forest-700 font-medium mb-6 text-lg">Founding Partner</p>
+                    <p class="text-forest-600 leading-relaxed text-sm mb-6">
+                        Manav is currently an AI Engineer at Glean leading the Semantic Search team to create the world's best AI-powered Enterprise-adapted Search System. He was previously a graduate student researcher at UC Berkeley working with Dr. Marti Hearst, Dr. Doug Downey, and the Allen Institute for AI on using NLP for Education and Scientific Document Understanding.
+                    </p>
+                    <a href="https://linkedin.com/in/manav-rathod" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-10 h-10 bg-forest-700 hover:bg-forest-800 rounded-full transition-colors duration-300 group">
+                        <svg class="w-5 h-5 text-treehouse-50 group-hover:scale-110 transition-transform duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 beige-depth-bg tree-canopy relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full pattern-dots-dark leaf-pattern opacity-20"></div>
+        <!-- Tree house platform effect -->
+        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3/4 h-2" style="background: linear-gradient(90deg, transparent, rgba(74, 124, 89, 0.15) 20%, rgba(74, 124, 89, 0.1) 50%, rgba(74, 124, 89, 0.15) 80%, transparent); border-radius: 2px;"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-6 lg:px-8 text-center">
+            <div data-aos="fade-up">
+                <h2 class="text-5xl md:text-6xl font-serif font-light text-forest-900 mb-8">Let's Shape Tomorrow</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-forest-600 to-forest-500 mx-auto mb-12"></div>
+                <p class="text-xl md:text-2xl text-forest-700 mb-6 max-w-4xl mx-auto leading-relaxed font-light">
+                    Are you building the future?
+                </p>
+                <p class="text-lg text-forest-600 mb-16 max-w-3xl mx-auto leading-relaxed">
+                    We partner with visionary founders who are creating technologies that will define the next decade. 
+                    If you're solving profound problems with breakthrough solutions, we'd love to hear from you.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center" data-aos="fade-up" data-aos-delay="200">
+                    <a href="mailto:hello@treehouseventures.com" class="group bg-forest-700 text-treehouse-50 px-12 py-5 rounded-full text-lg font-medium hover:bg-forest-800 transition-all duration-300 shadow-xl hover:shadow-2xl flex items-center space-x-3">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <span>Start a Conversation</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-forest-900 text-treehouse-100 py-16 relative overflow-hidden border-t border-forest-800">
+        <div class="absolute inset-0 bg-gradient-to-r from-forest-900 via-forest-800 to-forest-900"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row justify-between items-center">
+                <div class="flex items-center space-x-3 mb-8 lg:mb-0" data-aos="fade-right">
+                    <div class="w-14 h-14 flex items-center justify-center">
+                        <svg viewBox="0 0 100 100" class="w-12 h-12" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Tree trunk and ladder -->
+                            <path d="M45 70 L45 95 L55 95 L55 70" fill="#f5f3f0" stroke="#ebe7e0" stroke-width="1"/>
+                            <rect x="47" y="75" width="6" height="2" fill="#ebe7e0"/>
+                            <rect x="47" y="80" width="6" height="2" fill="#ebe7e0"/>
+                            <rect x="47" y="85" width="6" height="2" fill="#ebe7e0"/>
+                            <rect x="47" y="90" width="6" height="2" fill="#ebe7e0"/>
+                            
+                            <!-- Tree canopy -->
+                            <circle cx="50" cy="45" r="35" fill="#f5f3f0"/>
+                            
+                            <!-- Leaves -->
+                            <ellipse cx="30" cy="35" rx="4" ry="2" fill="#1a3b2e" opacity="0.8"/>
+                            <ellipse cx="45" cy="25" rx="3" ry="1.5" fill="#1a3b2e" opacity="0.8"/>
+                            <ellipse cx="65" cy="30" rx="4" ry="2" fill="#1a3b2e" opacity="0.8"/>
+                            <ellipse cx="35" cy="55" rx="3" ry="1.5" fill="#1a3b2e" opacity="0.8"/>
+                            <ellipse cx="70" cy="50" rx="4" ry="2" fill="#1a3b2e" opacity="0.8"/>
+                            <ellipse cx="55" cy="60" rx="3" ry="1.5" fill="#1a3b2e" opacity="0.8"/>
+                            
+                            <!-- Treehouse -->
+                            <rect x="40" y="35" width="20" height="15" fill="#1a3b2e" stroke="#f5f3f0" stroke-width="1.5"/>
+                            <polygon points="38,35 50,25 62,35" fill="#f5f3f0"/>
+                            <rect x="44" y="40" width="3" height="3" fill="#f5f3f0"/>
+                            <rect x="53" y="40" width="3" height="3" fill="#f5f3f0"/>
+                            <rect x="48" y="44" width="4" height="6" fill="#ebe7e0"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="text-2xl font-serif font-semibold text-treehouse-100">Treehouse</span>
+                        <span class="text-2xl font-serif font-light text-forest-400">Ventures</span>
+                    </div>
+                </div>
+                
+                <div class="text-center lg:text-right" data-aos="fade-left">
+                    <p class="text-treehouse-200 text-lg mb-2">Building the future, one investment at a time.</p>
+                    <p class="text-forest-500">© 2025 Treehouse Ventures. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass-effect-light', 'shadow-lg');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.remove('glass-effect-light', 'shadow-lg');
+                navbar.classList.add('bg-transparent');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect for floating elements
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.3;
+            const slowRate = scrolled * -0.1;
+            
+            document.querySelectorAll('.organic-float').forEach((element, index) => {
+                const speed = 0.2 + (index * 0.1);
+                element.style.transform = `translateY(${scrolled * -speed}px)`;
+            });
+
+            // Parallax for tree silhouettes
+            document.querySelectorAll('.tree-silhouette').forEach(element => {
+                element.style.transform = `translateY(${slowRate}px)`;
+            });
+        });
+
+        // Enhanced hover effects for cards
+        document.querySelectorAll('.hover-lift').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-12px) scale(1.02)';
+                this.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.6)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '';
+            });
+        });
+    </script>
+</body>
+</html> 
